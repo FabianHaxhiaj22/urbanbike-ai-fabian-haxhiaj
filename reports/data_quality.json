@@ -1,0 +1,42 @@
+{
+  "uci_original_rows": 731,
+  "uci_original_missing_cells": 0,
+  "nasa_rows": 731,
+  "joined_rows": 731,
+  "teaching_rows_before": 743,
+  "exact_duplicates_before": 12,
+  "blank_cells_before": 30,
+  "dtypes_before": {
+    "date": "object",
+    "rentals": "int64",
+    "weekday": "int64",
+    "month": "int64",
+    "workingday": "int64",
+    "holiday": "int64",
+    "temp_c": "object",
+    "rain_mm": "float64",
+    "wind_ms": "float64"
+  },
+  "clean_rows": 731,
+  "model_rows": 724,
+  "dtypes_after": {
+    "date": "datetime64[ns]",
+    "rentals": "int64",
+    "weekday": "int64",
+    "month": "int64",
+    "workingday": "int64",
+    "holiday": "int64",
+    "temp_c": "float64",
+    "rain_mm": "float64",
+    "wind_ms": "float64",
+    "rentals_lag1": "float64",
+    "rentals_lag7": "float64",
+    "rentals_mean7": "float64",
+    "temp_c_lag7": "float64",
+    "rain_mm_lag7": "float64",
+    "wind_ms_lag7": "float64",
+    "trend_days": "int64"
+  },
+  "remaining_missing_weather": 36,
+  "note": "Imputimi kryhet me vone brenda Pipeline, vetem nga train."
+}

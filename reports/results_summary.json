@@ -1,0 +1,102 @@
+{
+  "features": [
+    "rentals_lag1",
+    "rentals_lag7",
+    "rentals_mean7",
+    "temp_c_lag7",
+    "rain_mm_lag7",
+    "wind_ms_lag7",
+    "trend_days",
+    "weekday",
+    "month",
+    "workingday",
+    "holiday"
+  ],
+  "target": "rentals",
+  "splits": {
+    "train": {
+      "n": 479,
+      "start": "2011-01-08",
+      "end": "2012-04-30"
+    },
+    "validation": {
+      "n": 123,
+      "start": "2012-05-01",
+      "end": "2012-08-31"
+    },
+    "test": {
+      "n": 122,
+      "start": "2012-09-01",
+      "end": "2012-12-31"
+    }
+  },
+  "selected_by_validation_MAE": "Ridge",
+  "metrics": [
+    {
+      "split": "validation",
+      "model": "Yesterday",
+      "n": 123,
+      "MAE": 775.2032520325204,
+      "RMSE": 1118.8722036631714,
+      "R2": -0.41266512378546993
+    },
+    {
+      "split": "validation",
+      "model": "DummyMean",
+      "n": 123,
+      "MAE": 2953.866133713529,
+      "RMSE": 3086.956600674383,
+      "R2": -9.753239074384323
+    },
+    {
+      "split": "validation",
+      "model": "Ridge",
+      "n": 123,
+      "MAE": 687.5579403843578,
+      "RMSE": 933.0835077944604,
+      "R2": 0.017530039249381568
+    },
+    {
+      "split": "validation",
+      "model": "RandomForest",
+      "n": 123,
+      "MAE": 1821.528290498237,
+      "RMSE": 2017.9418421080024,
+      "R2": -3.5951061142660024
+    },
+    {
+      "split": "test",
+      "model": "Yesterday",
+      "n": 122,
+      "MAE": 916.4016393442623,
+      "RMSE": 1330.385815480903,
+      "R2": 0.5390942182923442
+    },
+    {
+      "split": "test",
+      "model": "DummyMean",
+      "n": 122,
+      "MAE": 2494.627622437454,
+      "RMSE": 2790.063736169565,
+      "R2": -1.0271467677114314
+    },
+    {
+      "split": "test",
+      "model": "Ridge",
+      "n": 122,
+      "MAE": 893.2512531732593,
+      "RMSE": 1252.6547023972123,
+      "R2": 0.5913799331053047
+    },
+    {
+      "split": "test",
+      "model": "RandomForest",
+      "n": 122,
+      "MAE": 1671.499165970045,
+      "RMSE": 2042.6535206645635,
+      "R2": -0.08654159900889691
+    }
+  ],
+  "training": "Train only; imputation learned inside each Pipeline.",
+  "test_design": "One day ahead, past daily observations available."
+}

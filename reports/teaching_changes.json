@@ -1,0 +1,8 @@
+{
+  "purpose": "Probleme te injektuara vetem per mesim",
+  "seed": 42,
+  "missing_temp": 18,
+  "missing_rain": 12,
+  "invalid_temp_text": 6,
+  "duplicated_rows": 12
+}

@@ -1,0 +1,24 @@
+{
+  "retrieved_utc": "2026-11-10T16:08:40.971282+00:00",
+  "uci_url": "https://archive.ics.uci.edu/static/public/275/bike+sharing+dataset.zip",
+  "nasa_url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M,PRECTOTCORR,WS2M&community=RE&longitude=-77.0369&latitude=38.9072&start=20110101&end=20121231&format=JSON&time-standard=LST",
+  "uci_landing_page": "https://archive.ics.uci.edu/dataset/275/bike+sharing+dataset",
+  "uci_doi": "https://doi.org/10.24432/C5W894",
+  "nasa_docs": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+  "latitude": 38.9072,
+  "longitude": -77.0369,
+  "time_standard": "LST (local solar time)",
+  "sha256": {
+    "nasa_power_daily.json": "76b791f8c15efcc4ba396b734d345e5c22dc936aa01ffa9cf134ff07ee748879",
+    "uci_bike_sharing.zip": "b70182d0d0508e9abbb79306ce5c0cec34869000f8220175ac83d11dbe845401",
+    "Readme.txt": "b92c8628622948bf0828c43a1b315d1517c3d7fd63654730d0dea379b8e88175",
+    "day.csv": "a6bcf826782d3c0fbfdcbeead17cd0884185a0dafe8ff10cd48a874ee7ba18be"
+  },
+  "derived_files": {
+    "nasa_weather.csv": {
+      "source": "nasa_power_daily.json",
+      "description": "Daily NASA parameter CSV; date,temp_c,rain_mm,wind_ms",
+      "sha256": "ed575d3885de0d3e8229a9822b5218a07d056ea1a22d71d9cac99344480b14a7"
+    }
+  }
+}
