@@ -25,8 +25,8 @@ Arsyeja e imputimit vetëm me train: mungesat plotësohen me medianën brenda `P
 
 ## Grafikët
 
-Vëzhgimi 1 dhe figura përkatëse: `reports/figures/01_demand.png` — kërkesa ka prirje rritëse dhe sezonalitet: rreth 1000–2000 qira/ditë në janar 2011, rreth 4500–5000 në verën 2011, rënie në dimër dhe rritje e fortë në pranverën 2012 (mbi 6000). Mesatarja ditore në train është 3446 qira në 2011 dhe 4454 në janar–prill 2012. Ka edhe rënie të mprehta të izoluara në disa ditë, që mesatarja 7-ditore i zbut.
-Vëzhgimi 2 dhe figura përkatëse: `reports/figures/03_weather.png` — ditët me temperaturë NASA t−7 më të lartë kanë zakonisht më shumë qira (korrelacioni në train ≈ 0.54); nën 0 °C qiratë janë kryesisht nën 3000. Shpërndarja është e gjerë. Nga `02_workingday.png`: ditët e punës kanë mesatare pak më të lartë (≈ 3761) se fundjavat/festat (≈ 3570), por ndryshimi është i vogël dhe mesatarja nuk tregon gjithë shpërndarjen.
+Vëzhgimi 1 dhe figura përkatëse: `reports/figures/01_demand.png` — kërkesa ka prirje rritëse dhe sezonalitet: më pak qira në dimër, më shumë në verë, dhe në pranverën 2012 kërkesa është më e lartë se në 2011. Ka edhe rënie të mprehta në disa ditë, që mesatarja 7-ditore i zbut.
+Vëzhgimi 2 dhe figura përkatëse: `reports/figures/03_weather.png` — ditët me temperaturë NASA t−7 më të lartë kanë zakonisht më shumë qira, por shpërndarja është e gjerë. Nga `02_workingday.png`: ditët e punës kanë mesatare pak më të lartë se fundjavat/festat, por ndryshimi është i vogël.
 Pse një lidhje e dukshme nuk provon shkakësi: temperatura dhe qiratë ndryshojnë të dyja me stinën dhe me rritjen e përgjithshme të shërbimit në kohë. Lidhja mund të vijë nga këta faktorë të përbashkët (p.sh. ditë më të gjata, pushime, më shumë stacione), jo vetëm nga temperatura. Grafiku tregon bashkëndryshim, jo një eksperiment të kontrolluar.
 
 ## Vlerësimi
@@ -42,7 +42,7 @@ Ndarjet kohore: train 2011-01-08 – 2012-04-30 (479), validation 2012-05-01 –
 
 Modeli i zgjedhur nga validation dhe arsyeja: Ridge. Mes dy kandidatëve ML ka MAE më të ulët në validation (687.558 kundrejt 1821.528 të Random Forest), dhe e mund edhe baseline-in Yesterday (775.203). Zgjedhja u bë para se të shihej testi.
 Rezultati i provës me Random Forest: Random Forest doli më keq se Ridge dhe madje më keq se baseline-i Yesterday, si në validation (MAE 1821.528) ashtu edhe në test (MAE 1671.499, R² -0.087). Arsyeja e mundshme: pemët nuk ekstrapolojnë jashtë vlerave të train. Kërkesa në 2012 u rrit përtej nivelit të train, ndërsa Ridge e kap prirjen me `trend_days`. Një model më kompleks nuk është automatikisht më i mirë.
-Interpretimi i gabimit në qira për ditë: në test, Ridge gabon mesatarisht ±893 qira në ditë (MAE). Me kërkesë tipike rreth 4000–7000 qira/ditë në shtator–dhjetor 2012, kjo është afërsisht 13–20%. RMSE (1252.655) është më e lartë se MAE, që tregon disa ditë me gabime të mëdha (p.sh. ditë me mot të keq ose festa). Ridge e mund baseline-in Yesterday vetëm pak (893 kundrejt 916). Shembull nga aplikacioni: për 2012-09-01 parashikimi është 6834.73, vlera reale 6140, gabimi absolut 694.73.
+Interpretimi i gabimit në qira për ditë: në test, Ridge gabon mesatarisht ±893 qira në ditë (MAE). RMSE (1252.655) është më e lartë se MAE, që tregon disa ditë me gabime të mëdha (p.sh. ditë me mot të keq ose festa). Ridge e mund baseline-in Yesterday vetëm pak (893 kundrejt 916). Shembull nga aplikacioni: për 2012-09-01 parashikimi është 6834.73, vlera reale 6140, gabimi absolut 694.73.
 Rezultati i klasifikimit, nëse u realizua: po. Pragu = mediana e train = 3907 qira; "e lartë" nëse rentals ≥ 3907. Në test ka 103 ditë të larta dhe 19 normale. DummyMostFrequent: accuracy 84.43%, balanced accuracy 50.00%, macro-F1 0.458 (nuk dallon asnjë ditë normale). LogisticRegression: accuracy 91.80%, balanced accuracy 77.98%, macro-F1 0.820. Matrica e konfuzionit `[[11, 8], [2, 101]]`: 8 ditë normale u parashikuan të larta, 2 të larta u parashikuan normale (`reports/figures/05_confusion.png`). Për shkak të klasave të pabalancuara, accuracy duhet lexuar bashkë me balanced accuracy dhe macro-F1.
 
 ## Kufizimet
@@ -55,9 +55,9 @@ Rezultati i klasifikimit, nëse u realizua: po. Pragu = mediana e train = 3907 q
 
 | Studenti | Skedari/ekrani | Puna dhe vendimi | Commit/prova |
 |---|---|---|---|
-| Fabian Haxhiaj | `.gitignore`, `requirements.txt`, `config/common.py`, `01_clean.py` | Mjedisi `.venv` me Python 3.12; pastrimi i kopjes didaktike. Vendimi: mungesat nuk plotësohen në pastrim, por me medianën vetëm nga train brenda Pipeline. | `reports/data_quality.json`, commit-i i parë |
-| Fabian Haxhiaj | `02_visualize.py`, `03_train.py` | Tre grafikë vetëm nga train dhe interpretimi i tyre; trajnimi i katër modeleve. Vendimi: zgjodha Ridge nga MAE në validation, jo nga testi. | `reports/figures/`, `reports/regression_metrics.csv`, commit-i i parë |
-| Fabian Haxhiaj | `04_classify.py`, `app.py`, `run_all.py`, `RAPORTI.md` | Klasifikimi fakultativ, aplikacioni lokal (provuar me 2012-09-01) dhe riekzekutimi i plotë. Vendimi: vlerësova klasifikimin me balanced accuracy dhe macro-F1, jo vetëm accuracy. | `reports/classification_metrics.json`, commit-i i parë |
+| Fabian Haxhiaj | `.venv`, `requirements.txt`, `.gitignore` | Përgatita Python 3.12 dhe bibliotekat në Linux (komandat Linux në vend të PowerShell). | `pip check` pa gabime |
+| Fabian Haxhiaj | `config/common.py`, `01_clean.py`–`04_classify.py`, `app.py`, `run_all.py` | Kodin nga slajdet e vendosa me ndihmën e Claude Code. Kontrollova çdo rezultat me numrat e slajdeve (731/724 rreshta, ndarjet 479/123/122, MAE 893.251, pragu 3907). | `reports/`, commit-i i parë |
+| Fabian Haxhiaj | `RAPORTI.md`, Figma | Rishikova interpretimin e grafikëve, zgjedhjen e Ridge nga validation dhe kufizimet; ndërtova konceptin e ndërfaqes në Figma. | commit-i "Shtoj lidhjen time GitHub" |
 
 ## Burimet
 
