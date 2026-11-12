@@ -2,7 +2,7 @@
 
 Studenti: Fabian Haxhiaj
 Grupi (nëse punohet në grup):
-Roli në aktivitet: punë individuale; realizova të gjitha fazat (mjedisi, pastrimi, grafikët, trajnimi, klasifikimi, aplikacioni dhe raporti).
+Roli në aktivitet: punë individuale; përgatita mjedisin, vendosa kodin nga slajdet me ndihmën e Claude Code, kontrollova rezultatet me numrat e slajdeve dhe rishikova raportin.
 Data: 2026-11-11
 GitHub-i im:
 Figma:
@@ -40,9 +40,9 @@ Pse një lidhje e dukshme nuk provon shkakësi: temperatura dhe qiratë ndryshoj
 
 Ndarjet kohore: train 2011-01-08 – 2012-04-30 (479), validation 2012-05-01 – 2012-08-31 (123), test 2012-09-01 – 2012-12-31 (122).
 
-Modeli i zgjedhur nga validation dhe arsyeja: Ridge. Mes dy kandidatëve ML ka MAE më të ulët në validation (687.558 kundrejt 1821.528 të Random Forest), dhe e mund edhe baseline-in Yesterday (775.203). Zgjedhja u bë para se të shihej testi.
+Modeli i zgjedhur nga validation dhe arsyeja: Ridge. Mes dy kandidatëve ML ka MAE më të ulët në validation (687.558 kundrejt 1821.528 të Random Forest), dhe e mund edhe baseline-in Yesterday (775.203). Zgjedhja bëhet vetëm sipas validation; testi nuk përdoret për zgjedhjen.
 Rezultati i provës me Random Forest: Random Forest doli më keq se Ridge dhe madje më keq se baseline-i Yesterday, si në validation (MAE 1821.528) ashtu edhe në test (MAE 1671.499, R² -0.087). Arsyeja e mundshme: pemët nuk ekstrapolojnë jashtë vlerave të train. Kërkesa në 2012 u rrit përtej nivelit të train, ndërsa Ridge e kap prirjen me `trend_days`. Një model më kompleks nuk është automatikisht më i mirë.
-Interpretimi i gabimit në qira për ditë: në test, Ridge gabon mesatarisht ±893 qira në ditë (MAE). RMSE (1252.655) është më e lartë se MAE, që tregon disa ditë me gabime të mëdha (p.sh. ditë me mot të keq ose festa). Ridge e mund baseline-in Yesterday vetëm pak (893 kundrejt 916). Shembull nga aplikacioni: për 2012-09-01 parashikimi është 6834.73, vlera reale 6140, gabimi absolut 694.73.
+Interpretimi i gabimit në qira për ditë: në test, Ridge gabon mesatarisht 893 qira në ditë (MAE). RMSE (1252.655) është më e lartë se MAE, që tregon disa ditë me gabime të mëdha (p.sh. ditë me mot të keq ose festa). Ridge e mund baseline-in Yesterday vetëm pak (893 kundrejt 916). Shembull nga aplikacioni: për 2012-09-01 parashikimi është 6834.73, vlera reale 6140, gabimi absolut 694.73.
 Rezultati i klasifikimit, nëse u realizua: po. Pragu = mediana e train = 3907 qira; "e lartë" nëse rentals ≥ 3907. Në test ka 103 ditë të larta dhe 19 normale. DummyMostFrequent: accuracy 84.43%, balanced accuracy 50.00%, macro-F1 0.458 (nuk dallon asnjë ditë normale). LogisticRegression: accuracy 91.80%, balanced accuracy 77.98%, macro-F1 0.820. Matrica e konfuzionit `[[11, 8], [2, 101]]`: 8 ditë normale u parashikuan të larta, 2 të larta u parashikuan normale (`reports/figures/05_confusion.png`). Për shkak të klasave të pabalancuara, accuracy duhet lexuar bashkë me balanced accuracy dhe macro-F1.
 
 ## Kufizimet
