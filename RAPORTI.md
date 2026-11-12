@@ -4,8 +4,8 @@ Studenti: Fabian Haxhiaj
 Grupi (nëse punohet në grup):
 Roli në aktivitet: punë individuale; përgatita mjedisin, vendosa kodin nga slajdet me ndihmën e Claude Code, kontrollova rezultatet me numrat e slajdeve dhe rishikova raportin.
 Data: 2026-11-11
-GitHub-i im:
-Figma:
+GitHub-i im: https://github.com/FabianHaxhiaj22/urbanbike-ai-fabian-haxhiaj
+Figma: https://www.figma.com/design/zKrSuz05QZnVkusGThjnCS
 
 ## Qëllimi
 
